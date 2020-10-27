@@ -25,7 +25,15 @@ function matchWhite(str){
     return 2;
 }
 
+$('.row2 div').html("<img src="+pawn_b+"/>");
+    $('.row7 div').html("<img src="+pawn_w+"/>");
+    for(i=0; i<=7; i++){
+        $('.row1 div').eq(i).html("<img src="+black_row[i]+"/>");
+        $('.row8 div').eq(i).html("<img src="+white_row[i]+"/>");
+    };
+
 $(document).ready(function(){
+    $('#loader').css('top','-105vh')
     $('#reset').click(function(){
         $('.row div').empty();
         $('.row2 div').html("<img src="+pawn_b+"/>");
