@@ -1,0 +1,59 @@
+html {
+    margin: 0;
+    padding:0;
+}
+
+.board {
+    width: 40rem ;
+    height: 40rem;
+    margin:1.5rem auto;
+}
+
+.row {
+    display: flex;
+    
+}
+
+.row div {
+    display: flex;
+    height: 5rem;
+    width: 5rem;
+    background-color: #AED6F1 ;
+    justify-content: center;
+    align-items: center;
+}
+
+.row div:hover {
+    box-shadow: inset 2px 2px 5px yellow,
+                inset -2px -2px 5px yellow ;
+}
+
+.board div:nth-child(even) div:nth-child(odd) {
+    background-color: #5DADE2;
+}
+
+.board div:nth-child(odd) div:nth-child(even) {
+    background-color: #5DADE2;
+}
+
+img {
+    height: 100%;
+    cursor: pointer;
+}
+
+#reset {
+    position: relative;
+    left: 33em;
+    top: -12px;
+}
+
+#gback {
+    position: relative;
+    left: 34em;
+    top: -12px;
+}
+
+.hovereff {
+    box-shadow: inset 2px 2px 5px yellow,
+                inset -2px -2px 5px yellow ;
+}
