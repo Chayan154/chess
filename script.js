@@ -13,17 +13,37 @@ var king_b = "https://tinyurl.com/y2fcudgg";
 
 var white_row = [rook_w,knight_w,bishop_w,queen_w,king_w,bishop_w,knight_w,rook_w];
 var black_row = [rook_b,knight_b,bishop_b,queen_b,king_b,bishop_b,knight_b,rook_b];
+ 
+var white_pieces = [pawn_w,bishop_w,knight_w,rook_w,queen_w,king_w];
+var black_pieces = [pawn_b,bishop_b,knight_b,rook_b,queen_b,king_b];
 
-var white_peices = white_row.concat(pawn_w);
-var black_peices = black_row.concat(pawn_b);
+var piece_sym_white = ["P","B","N","R","Q","K"];
+var piece_sym_black = ["p","b","n","r","q","k"];
+
 
 function matchWhite(str){
-    for(let i=0;i<9;i++){
-        if(str.includes(white_peices[i]))
+    for(let i=0;i<white_pieces.length;i++){
+        if(str.includes(white_pieces[i]))
             return 1;
     }
     return 2;
 }
+
+function whatPiece(str){
+    if (matchWhite(str) == 1){
+        for(let i=0;i<white_pieces.length;i++){
+            if(str.includes(white_pieces[i]))
+                return piece_sym_white[i];
+        }
+    }
+    else {
+        for(let j=0;j<white_pieces.length;j++){
+            if(str.includes(black_pieces[j]))
+                return piece_sym_black[j];
+        }
+    }
+}
+
 
 $('.row2 div').html("<img src="+pawn_b+"/>");
     $('.row7 div').html("<img src="+pawn_w+"/>");
@@ -53,6 +73,7 @@ $(document).ready(function(){
     var colour1=0,colour2=0;
     var a1,a2;
     var sqrid1,sqrid2;
+    var firstMove = true;
     for(i=0;i<64;i++){
         $('.row div').eq(i).click(function(){
             if(check){
