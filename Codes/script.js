@@ -72,6 +72,7 @@ $(document).ready(function(){
     var check = true;
     var colour1=0,colour2=0;
     var a1,a2;
+    var nextMove = 1;
     var sqrid1,sqrid2;
     var firstMove = true;
     for(i=0;i<64;i++){
@@ -79,11 +80,15 @@ $(document).ready(function(){
             if(check){
                 a1 = $(this).html();
                 sqrid1 = $(this).attr("id");
-                if (a1!=""){
+                if (a1!="" & matchWhite(a1)==nextMove){
                     check = false;
                     sqrid1 = $(this).attr("id");
                     colour1 = matchWhite(a1);
                     $(this).toggleClass("hovereff");
+                    if (nextMove==1)
+                        nextMove = 2;
+                    else
+                        nextMove = 1;
                 }
             }
             else {
