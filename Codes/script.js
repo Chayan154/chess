@@ -62,6 +62,8 @@ $(document).ready(function(){
             $('.row1 div').eq(i).html("<img src="+black_row[i]+"/>");
             $('.row8 div').eq(i).html("<img src="+white_row[i]+"/>");
         };
+        nextMove = 1;
+        check = true;
     });
 
     $('#gback').click(function(){
@@ -74,7 +76,6 @@ $(document).ready(function(){
     var a1,a2;
     var nextMove = 1;
     var sqrid1,sqrid2;
-    var firstMove = true;
     for(i=0;i<64;i++){
         $('.row div').eq(i).click(function(){
             if(check){
