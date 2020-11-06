@@ -1,3 +1,102 @@
+///////////////////////////////////////////////////////////////////////////////////////////////
+//////////                              Kala's Contribution codes                  ////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+class Vector {
+
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    add(vec) {
+        this.x += vec.x;
+        this.y += vec.y;
+    }
+
+    mul(c) {
+        this.x *= c;
+        this.y *= c;
+    }
+
+    copy() {
+        return new Vector(this.x, this.y);
+    }
+
+}
+
+class ChessChecks {
+    static checkBishop(src, targ) {
+        let diff_x = Math.abs(src.x - targ.x);
+        let diff_y = Math.abs(src.y - targ.y);
+
+        return diff_x == diff_y;
+    }
+
+    static checkRook(src, targ) {
+        return (src.x == targ.x && src.y != targ.y) || (src.x != targ.x && src.y == targ.y);
+    }
+
+    static checkKing(src, targ) {
+        let disX = Math.abs(src.x - targ.x);
+        let disY = Math.abs(src.y - targ.y);
+
+        return (disX <= 1 && disY <= 1);
+    }
+
+    static checkQueen(src, targ) {
+        return this.checkRook(src, targ) || this.checkBishop(src, targ);
+    }
+
+    static checkKnight(src, targ) {
+        let dx = Math.abs(src.x - targ.x);
+        let dy = Math.abs(src.y - targ.y);
+
+        return (dx == 1 && dy == 2) || (dx == 2 && dy == 1);
+    }
+
+}
+
+function to_vector(str) {
+
+    let dct = ['a', 'b', 'c', 'd', 'e', 'f',
+        'g', 'h'];
+
+    // separate the file and rank 
+    let file = str[0].toLowerCase();
+    let rank = Number(str[1]);
+
+    // extract the corresponding letter 
+    let x = dct.indexOf(file);
+
+    if (x == -1) {
+        return null;
+    }
+
+    return new Vector(x + 1, rank);
+}
+function to_chess_notation(vector) {
+
+    let dct = ['a', 'b', 'c', 'd', 'e', 'f',
+        'g', 'h'];
+
+    if (vector.x < 1 || vector.x > 8 || vector.y < 0 || vector.y > 8) {
+        return null;
+    }
+    let file = dct[vector.x - 1].toUpperCase();
+    let rank = vector.y;
+
+    return file + rank;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+//////////                               AREA 51                                   ////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
 var pawn_w = "https://tinyurl.com/y4let99z";
 var pawn_b = "https://tinyurl.com/yx9eurm2";
 var bishop_w = "https://tinyurl.com/yy7jj5ky";
@@ -20,6 +119,7 @@ var black_pieces = [pawn_b,bishop_b,knight_b,rook_b,queen_b,king_b];
 var piece_sym_white = ["P","B","N","R","Q","K"];
 var piece_sym_black = ["p","b","n","r","q","k"];
 
+//Chess functions
 
 function matchWhite(str){
     for(let i=0;i<white_pieces.length;i++){
@@ -44,6 +144,44 @@ function whatPiece(str){
     }
 }
 
+function checkMove(peice, curr, targ) {
+
+    let vcurr = to_vector(curr);
+    let vtarg = to_vector(targ);
+
+    if (peice == 'P') {
+        let dx = Math.abs(vcurr.x - vtarg.x);
+        let dy = vtarg.y - vcurr.y;
+        return (dy == 1) && (dx <= 1);
+    }
+    else if (peice == 'p') {
+        let dx = Math.abs(vcurr.x - vtarg.x);
+        let dy = vtarg.y - vcurr.y;
+        return (dy == -1) && (dx <= 1);
+    }
+    else if (peice == 'B' || peice == 'b') {
+        return ChessChecks.checkBishop(vcurr, vtarg);
+    }
+    else if (peice == 'N' || peice == 'n') {
+        return ChessChecks.checkKnight(vcurr, vtarg);
+    }
+    else if (peice == 'R' || peice == 'r') {
+        return ChessChecks.checkRook(vcurr, vtarg);
+    }
+    else if (peice == 'Q' || peice == 'q') {
+        return ChessChecks.checkQueen(vcurr, vtarg);
+    }
+    else if (peice == 'K' || peice == 'k') {
+        return ChessChecks.checkKing(vcurr, vtarg);
+    }
+    else {
+        console.log("Invalid arguments");
+        return null;
+    }
+}
+
+
+// Main jquery and DOM manipulation code
 
 $('.row2 div').html("<img src="+pawn_b+"/>");
     $('.row7 div').html("<img src="+pawn_w+"/>");
