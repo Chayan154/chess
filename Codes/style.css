@@ -23,6 +23,11 @@ html {
     transition-delay: 2s ;
 }
 
+#loadgif {
+    width: 25%;
+    height: auto;
+}
+
 
 .board {
     width: 40rem ;
