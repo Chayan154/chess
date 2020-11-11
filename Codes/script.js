@@ -58,7 +58,7 @@ class ChessChecks {
 }
 
 function to_vector(str) {
-    let dct = ["a", "b", "c", "d", "e", "f", "g", "h"];
+    let dct = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
 
     // separate the file and rank
     let file = str[0].toLowerCase();
@@ -74,7 +74,7 @@ function to_vector(str) {
     return new Vector(x + 1, rank);
 }
 function to_chess_notation(vector) {
-    let dct = ["a", "b", "c", "d", "e", "f", "g", "h"];
+    let dct = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
 
     if (vector.x < 1 || vector.x > 8 || vector.y < 0 || vector.y > 8) {
         return null;
@@ -89,18 +89,18 @@ function to_chess_notation(vector) {
 //////////                               AREA 51                                   ////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
-var pawn_w = "https://tinyurl.com/y4let99z";
-var pawn_b = "https://tinyurl.com/yx9eurm2";
-var bishop_w = "https://tinyurl.com/yy7jj5ky";
-var bishop_b = "https://tinyurl.com/y2rr7tsg";
-var knight_w = "https://tinyurl.com/y699gbh4";
-var knight_b = "https://tinyurl.com/y5jrzyao";
-var rook_w = "https://tinyurl.com/y4fpnkmr";
-var rook_b = "https://tinyurl.com/y54b8p4f";
-var queen_w = "https://tinyurl.com/y49nm257";
-var queen_b = "https://tinyurl.com/y3zw96oc";
-var king_w = "https://tinyurl.com/y5uettdg";
-var king_b = "https://tinyurl.com/y2fcudgg";
+var pawn_w = 'https://tinyurl.com/y4let99z';
+var pawn_b = 'https://tinyurl.com/yx9eurm2';
+var bishop_w = 'https://tinyurl.com/yy7jj5ky';
+var bishop_b = 'https://tinyurl.com/y2rr7tsg';
+var knight_w = 'https://tinyurl.com/y699gbh4';
+var knight_b = 'https://tinyurl.com/y5jrzyao';
+var rook_w = 'https://tinyurl.com/y4fpnkmr';
+var rook_b = 'https://tinyurl.com/y54b8p4f';
+var queen_w = 'https://tinyurl.com/y49nm257';
+var queen_b = 'https://tinyurl.com/y3zw96oc';
+var king_w = 'https://tinyurl.com/y5uettdg';
+var king_b = 'https://tinyurl.com/y2fcudgg';
 
 var white_row = [
     rook_w,
@@ -126,8 +126,8 @@ var black_row = [
 var white_pieces = [pawn_w, bishop_w, knight_w, rook_w, queen_w, king_w];
 var black_pieces = [pawn_b, bishop_b, knight_b, rook_b, queen_b, king_b];
 
-var piece_sym_white = ["P", "B", "N", "R", "Q", "K"];
-var piece_sym_black = ["p", "b", "n", "r", "q", "k"];
+var piece_sym_white = ['P', 'B', 'N', 'R', 'Q', 'K'];
+var piece_sym_black = ['p', 'b', 'n', 'r', 'q', 'k'];
 
 //Chess functions
 
@@ -155,74 +155,74 @@ function checkMove(peice, curr, targ) {
     let vcurr = to_vector(curr);
     let vtarg = to_vector(targ);
 
-    if (peice == "P") {
+    if (peice == 'P') {
         let dx = Math.abs(vcurr.x - vtarg.x);
         let dy = vtarg.y - vcurr.y;
-        if (curr[1] == "2") {
+        if (curr[1] == '2') {
             return (dy == 2 && dx == 0) || (dy == 1 && dx <= 1);
         } else {
             return dy == 1 && dx <= 1;
         }
-    } else if (peice == "p") {
+    } else if (peice == 'p') {
         let dx = Math.abs(vcurr.x - vtarg.x);
         let dy = vtarg.y - vcurr.y;
-        if (curr[1] == "7") {
+        if (curr[1] == '7') {
             return (dy == -2 && dx == 0) || (dy == -1 && dx <= 1);
         } else {
             return dy == -1 && dx <= 1;
         }
-    } else if (peice == "B" || peice == "b") {
+    } else if (peice == 'B' || peice == 'b') {
         return ChessChecks.checkBishop(vcurr, vtarg);
-    } else if (peice == "N" || peice == "n") {
+    } else if (peice == 'N' || peice == 'n') {
         return ChessChecks.checkKnight(vcurr, vtarg);
-    } else if (peice == "R" || peice == "r") {
+    } else if (peice == 'R' || peice == 'r') {
         return ChessChecks.checkRook(vcurr, vtarg);
-    } else if (peice == "Q" || peice == "q") {
+    } else if (peice == 'Q' || peice == 'q') {
         return ChessChecks.checkQueen(vcurr, vtarg);
-    } else if (peice == "K" || peice == "k") {
+    } else if (peice == 'K' || peice == 'k') {
         return ChessChecks.checkKing(vcurr, vtarg);
     } else {
-        console.log("Invalid arguments");
+        console.log('Invalid arguments');
         return null;
     }
 }
 
 // Main jquery and DOM manipulation code
 
-$(".row2 div").html("<img src=" + pawn_b + "/>");
-$(".row7 div").html("<img src=" + pawn_w + "/>");
+$('.row2 div').html('<img src=' + pawn_b + '/>');
+$('.row7 div').html('<img src=' + pawn_w + '/>');
 for (i = 0; i <= 7; i++) {
-    $(".row1 div")
+    $('.row1 div')
         .eq(i)
-        .html("<img src=" + black_row[i] + "/>");
-    $(".row8 div")
+        .html('<img src=' + black_row[i] + '/>');
+    $('.row8 div')
         .eq(i)
-        .html("<img src=" + white_row[i] + "/>");
+        .html('<img src=' + white_row[i] + '/>');
 }
 
 $(document).ready(function () {
-    $("#loader").css("top", "-105vh");
-    $("#reset").click(function () {
-        $(".row div").empty();
-        $(".row2 div").html("<img src=" + pawn_b + "/>");
-        $(".row7 div").html("<img src=" + pawn_w + "/>");
+    $('#loader').css('top', '-105vh');
+    $('#reset').click(function () {
+        $('.row div').empty();
+        $('.row2 div').html('<img src=' + pawn_b + '/>');
+        $('.row7 div').html('<img src=' + pawn_w + '/>');
         for (i = 0; i <= 7; i++) {
-            $(".row1 div")
+            $('.row1 div')
                 .eq(i)
-                .html("<img src=" + black_row[i] + "/>");
-            $(".row8 div")
+                .html('<img src=' + black_row[i] + '/>');
+            $('.row8 div')
                 .eq(i)
-                .html("<img src=" + white_row[i] + "/>");
+                .html('<img src=' + white_row[i] + '/>');
         }
         nextMove = 1;
         check = true;
     });
 
-    $("#gback").click(function () {
-        $("#" + sqrid1).empty();
-        $("#" + sqrid2).empty();
-        $("#" + sqrid1).html(a1);
-        $("#" + sqrid2).html(a2);
+    $('#gback').click(function () {
+        $('#' + sqrid1).empty();
+        $('#' + sqrid2).empty();
+        $('#' + sqrid1).html(a1);
+        $('#' + sqrid2).html(a2);
         if (nextMove == 1) nextMove = 2;
         else nextMove = 1;
     });
@@ -235,23 +235,23 @@ $(document).ready(function () {
     var nextMove = 1;
     var sqrid1, sqrid2;
     for (i = 0; i < 64; i++) {
-        $(".row div")
+        $('.row div')
             .eq(i)
             .click(function () {
                 if (check) {
                     a1 = $(this).html();
-                    sqrid1 = $(this).attr("id");
+                    sqrid1 = $(this).attr('id');
                     currPeice = whatPiece(a1);
-                    if ((a1 != "") & (matchWhite(a1) == nextMove)) {
+                    if ((a1 != '') & (matchWhite(a1) == nextMove)) {
                         check = false;
-                        sqrid1 = $(this).attr("id");
+                        sqrid1 = $(this).attr('id');
                         colour1 = matchWhite(a1);
-                        $(this).toggleClass("hovereff");
+                        $(this).toggleClass('hovereff');
                     }
                 } else {
                     a2 = $(this).html();
-                    sqrid2 = $(this).attr("id");
-                    if (a2 != "") {
+                    sqrid2 = $(this).attr('id');
+                    if (a2 != '') {
                         colour2 = matchWhite(a2);
                     } else {
                         colour2 = 0;
@@ -259,16 +259,16 @@ $(document).ready(function () {
 
                     if (sqrid1 == sqrid2) {
                         check = true;
-                        $("#" + sqrid1).toggleClass("hovereff");
+                        $('#' + sqrid1).toggleClass('hovereff');
                     } else if (
                         colour2 != colour1 &&
                         checkMove(currPeice, sqrid1, sqrid2)
                     ) {
                         $(this).html(a1);
-                        sqrid2 = $(this).attr("id");
+                        sqrid2 = $(this).attr('id');
                         check = true;
-                        $("#" + sqrid1).empty();
-                        $("#" + sqrid1).toggleClass("hovereff");
+                        $('#' + sqrid1).empty();
+                        $('#' + sqrid1).toggleClass('hovereff');
                         if (nextMove == 1) nextMove = 2;
                         else nextMove = 1;
                     }
