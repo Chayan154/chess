@@ -210,7 +210,6 @@ function moveValid(peice, curr, targ) {
     if (checkMove(peice, curr, targ)) {
         let vcurr = to_vector(curr);
         let vtarg = to_vector(targ);
-        let unit = findUnit(curr, targ);
         while (!vcurr.isEqual(vtarg)) {
             vcurr.add(unit);
             console.log(vcurr);
