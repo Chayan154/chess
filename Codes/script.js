@@ -91,14 +91,16 @@ function to_chess_notation(vector) {
 function findUnit(curr, fin) {
     let vcurr = to_vector(curr);
     let vtarg = to_vector(fin);
-    let dx = vcurr.x - vtarg.x;
+    let dx = vtarg.x - vcurr.x;
     let dy = vtarg.y - vcurr.y;
     let mod_dx = Math.abs(dx);
     let mod_dy = Math.abs(dy);
     if (mod_dx == mod_dy) {
         return new Vector(dx / mod_dx, dy / mod_dy);
-    } else if (mod_dx == 0 || mod_dy == 0) {
-        return new Vector(dx / mod_dx, dy / mod_dy);
+    } else if (mod_dx == 0) {
+        return new Vector(dx, dy / mod_dy);
+    } else if (mod_dy == 0) {
+        return new Vector(dx / mod_dx, dy);
     } else return false;
 }
 
