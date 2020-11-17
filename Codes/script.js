@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////
-//////////                              Kala's Contribution codes                  ////////////
+//////////                Kala's Contribution codes && my additions                ////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 class Vector {
@@ -16,6 +16,9 @@ class Vector {
     mul(c) {
         this.x *= c;
         this.y *= c;
+    }
+    isEqual(vec) {
+        return this.x === vec.x && this.y === vec.y;
     }
 
     copy() {
@@ -80,9 +83,25 @@ function to_chess_notation(vector) {
         return null;
     }
     let file = dct[vector.x - 1].toUpperCase();
-    let rank = vector.y;
+    let rank = vector.y.toString();
 
     return file + rank;
+}
+
+function findUnit(curr, fin) {
+    let vcurr = to_vector(curr);
+    let vtarg = to_vector(fin);
+    let dx = vtarg.x - vcurr.x;
+    let dy = vtarg.y - vcurr.y;
+    let mod_dx = Math.abs(dx);
+    let mod_dy = Math.abs(dy);
+    if (mod_dx == mod_dy) {
+        return new Vector(dx / mod_dx, dy / mod_dy);
+    } else if (mod_dx == 0) {
+        return new Vector(dx, dy / mod_dy);
+    } else if (mod_dy == 0) {
+        return new Vector(dx / mod_dx, dy);
+    } else return false;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -187,6 +206,21 @@ function checkMove(peice, curr, targ) {
     }
 }
 
+function moveValid(peice, curr, targ) {
+    if (checkMove(peice, curr, targ)) {
+        let vcurr = to_vector(curr);
+        let vtarg = to_vector(targ);
+        let unit = findUnit(curr, targ);
+        while (vcurr.isEqual(vtarg)) {
+            vcurr.add(unit);
+            console.log(vcurr);
+            let currId = to_chess_notation(vcurr);
+            if ($(currId).html() != '') return false;
+            else return true;
+        }
+    } else return false;
+}
+
 // Main jquery and DOM manipulation code
 
 $('.row2 div').html('<img src=' + pawn_b + '/>');
@@ -262,7 +296,7 @@ $(document).ready(function () {
                         $('#' + sqrid1).toggleClass('hovereff');
                     } else if (
                         colour2 != colour1 &&
-                        checkMove(currPeice, sqrid1, sqrid2)
+                        moveValid(currPeice, sqrid1, sqrid2)
                     ) {
                         $(this).html(a1);
                         sqrid2 = $(this).attr('id');
