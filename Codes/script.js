@@ -88,9 +88,7 @@ function to_chess_notation(vector) {
     return file + rank;
 }
 
-function findUnit(curr, fin) {
-    let vcurr = to_vector(curr);
-    let vtarg = to_vector(fin);
+function findUnit(vcurr, vtarg) {
     let dx = vtarg.x - vcurr.x;
     let dy = vtarg.y - vcurr.y;
     let mod_dx = Math.abs(dx);
@@ -210,13 +208,13 @@ function moveValid(peice, curr, targ) {
     if (checkMove(peice, curr, targ)) {
         let vcurr = to_vector(curr);
         let vtarg = to_vector(targ);
-        while (!vcurr.isEqual(vtarg)) {
+        let unit = findUnit(vcurr, vtarg);
+        while (!vcurr.isEqual(vtarg) && peice.toLowerCase() != 'n') {
             vcurr.add(unit);
-            console.log(vcurr);
             let currId = to_chess_notation(vcurr);
-            if ($(currId).html() != '') return false;
-            else return true;
+            if ($('#' + currId).html() != '') return false;
         }
+        return true;
     } else return false;
 }
 
